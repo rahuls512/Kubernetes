@@ -1,0 +1,8 @@
+#Create NameSpace using Using Declarative Manifest file
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-ns
+  labels:
+    team: testteam

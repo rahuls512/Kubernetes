@@ -1,0 +1,33 @@
+#daemonset object:
+#we define a DaemonSet object named "example-daemonset" that ensures 
+#that a pod with the "example" label is running on every node in the cluster.
+#The pod template specifies a single container named "example-container" that runs the latest version 
+#of the Nginx image and exposes port 80. Additionally, a shared empty directory is mounted
+#to the container's file system at "/usr/share/nginx/html" to allow data sharing among all containers in the DaemonSet.
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: test-daemonset
+  labels:
+    app: test
+spec:
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+        - name: test-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: shared-data
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: shared-data
+          emptyDir: {}

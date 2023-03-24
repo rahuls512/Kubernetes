@@ -1,0 +1,20 @@
+#The YAML file should include all the necessary components such as deployments, services, and pods.
+#Here's an example YAML file that creates two pods:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod-1
+spec:
+  containers:
+  - name: my-container-1
+    image: alpine
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod-2
+spec:
+  containers:
+  - name: my-container-2
+    image: nginx

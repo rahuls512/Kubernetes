@@ -1,0 +1,74 @@
+#Create a new demo namespace :
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test
+  labels:
+    team: testteam
+
+#Resource quota object :
+
+apiVersion: v1 
+
+kind: ResourceQuota 
+
+metadata: 
+
+  name: mem-cpu 
+
+  namespace: test
+
+spec: 
+
+  hard: 
+
+    requests.cpu: "0.5"    
+
+    requests.memory: 512Mi 
+
+    limits.cpu: "1"    
+
+    limits.memory: 1Gi 
+
+#Deploy Demo1 POD/Application within this namespace. 
+#Whose resource request can be fulfilled by the resource quota set for this namespace 
+
+apiVersion: v1 
+
+kind: Pod 
+
+metadata: 
+
+  namespace: test
+
+  name: pod-test1 
+
+  labels: 
+
+     app: test1 
+
+spec: 
+
+  containers: 
+
+  - name: test1 
+
+    image: nginx:latest 
+
+    ports: 
+
+    - containerPort: 80 
+
+    resources: 
+
+      limits: 
+
+        memory: "400Mi" 
+
+        cpu: "0.3"       
+
+      requests: 
+
+        memory: "300Mi" 
+
+        cpu: "0.2" 
